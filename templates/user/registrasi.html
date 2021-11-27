@@ -1,0 +1,21 @@
+{% extends 'base_user.html' %}
+{% block content %}
+<form action="#" method="#">
+    <div class="box">
+        <div class="login-area">
+            <h1 class="title">Registrasi</h1>
+            <p class="deskripsi">Silahkan Isi Form Dibawah Ini</p>
+            <div class="input-field">
+                <input type="text" class="username" placeholder="Username">
+                <input type="email" class="email" placeholder="Email">
+                <input type="password" class="password" placeholder="Password">
+                <input type="password" class="password" placeholder="Password">
+            </div>
+            <input type="submit" value="Registrasi" class="submit">
+            <div class="button">
+                <button class="btn"><a href="{% url 'login' %}">Kembali</a> </button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

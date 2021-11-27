@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Input Proposal</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+        * {
+            text-decoration: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .wrapper {
+            width: 1200px;
+            margin: auto;
+            position: relative;
+        }
+
+        a {
+            color: #ffffff;
+        }
+
+        .box {
+            position: absolute;
+            width: 800px;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            box-shadow: 0 10px 10px 10px rgb(0, 0, 0, .2);
+        }
+
+        .login-area {
+            text-align: center;
+            padding: 30px 50px 30px 50px;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .deskripsi {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .username,
+        .email,
+        .password {
+            width: 400px;
+            text-align: center;
+            padding: 13px 0;
+            border-radius: 20px;
+            outline: none;
+            border: none;
+            background-color: rgba(63, 61, 60, 0.5);
+            margin-bottom: 15px;
+            transition: 5s;
+        }
+
+        .username::placeholder,
+        .email::placeholder,
+        .password::placeholder {
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .username:focus,
+        .email:focus,
+        .password:focus {
+            background-color: rgba(122, 122, 122, 0.7);
+        }
+
+        .submit {
+            width: 150px;
+            padding: 10px;
+            background-color: rgb(99, 99, 121);
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            outline: none;
+            transition: .2s;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: #67636d;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            height: 30px;
+            border-radius: 49px;
+            background-color: #476063;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: 0.5s;
+            border: 2px solid #9ba7b4;
+            width: 150px;
+        }
+
+        .btn:hover {
+            background-color: #7B7D7D;
+        }
+    </style>
+</head>
+
+<body>
+    {% block content %}
+
+    {% endblock %}
+</body>
+
+</html>
