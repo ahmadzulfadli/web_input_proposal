@@ -1,22 +1,288 @@
 {% extends 'base.html' %}
 {% block content %}
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row2">
-        <section id="ctdetails" class="hoc container clear">
-            <!-- ################################################################################################ -->
-            <article class="one_half">
-                <h6 class="heading">Isi Biodata Anda Pada Kolom Dibawah Ini</h6>
-                
-                <form action="#" method="post">
-                    {{proposal.as_p}}
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+    <section>
+        <!-- ################################################################################################ -->
+        <style>
+            @charset "utf-8";
+
+            @import url("fontawesome-free/css/fontawesome-all.min.css");
+            @import url("framework.css");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                margin-top: 100px;
+                margin-bottom: 20px;
+                max-width: 700px;
+                width: 100%;
+                background-color: #fff;
+                padding: 25px 30px;
+                border-radius: 5px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            .container .title {
+                font-size: 30px;
+                font-weight: 700;
+                position: relative;
+            }
+
+            .container .deskripsi1 {
+                font-weight: 500;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            .content form .Detail-Pengaju {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 20px 0 12px 0;
+            }
+
+            form .Detail-Pengaju .input-box {
+                margin-bottom: 15px;
+                width: calc(100% / 2 - 20px);
+            }
+
+            form .input-box span.details {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .Detail-Pengaju .input-box input {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .Detail-Pengaju .input-box input:focus,
+            .Detail-Pengaju .input-box input:valid {
+                border-color: #929292;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                text-align: left;
+                margin-bottom: 10px;
+            }
+
+            form .Detail-Proposal .input-box1 {
+                margin-bottom: 15px;
+                width: calc(200% / 2 - 20px);
+            }
+
+            form .input-box1 textarea {
+                width: calc(200% / 2 - 20px);
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            form .input-box1 span.details {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .Detail-Proposal .input-box1 input {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .Detail-Proposal .input-box1 input:focus,
+            .Detail-Proposal .input-box1 input:valid {
+                border-color: #929292;
+            }
+
+            .upload-box {
+                font-size: 16px;
+                background-color: white;
+                width: 100%;
+                align-items: center;
+                padding-top: 10px;
+                padding-bottom: 7px;
+            }
+
+            form .button {
+                height: 45px;
+                margin: 35px 0
+            }
+
+            form .button input {
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
+                border: none;
+                color: #000;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background: linear-gradient(135deg, #cecece, #afafaf);
+            }
+
+            form .button input:hover {
+                /* transform: scale(0.99); */
+                background: linear-gradient(-135deg, #cecece, #afafaf);
+            }
+
+            @media(max-width: 584px) {
+                .container {
+                    max-width: 100%;
+                }
+
+                form .Detail-Pengaju .Detail-Proposal .input-box .input-box1 {
+                    margin-bottom: 15px;
+                    width: 100%;
+                }
+
+                .content form .Detail-Pengaju .Detail-Proposal {
+                    max-height: 500px;
+                    overflow-y: scroll;
+                }
+
+                .Detail-Pengaju .Detail-Proposal::-webkit-scrollbar {
+                    width: 5px;
+                }
+            }
+
+            @media(max-width: 459px) {
+                .container .content {
+                    flex-direction: column;
+                }
+            }
+        </style>
+        <div class="container">
+            <div class="title">Penginputan Proposal Kegiatan</div>
+            <p class="deskripsi1">Silahkan mengisi bagian-bagian formulir pengajuan proposal sesuai langkah-langkah
+                pengisian untuk dapat diinput.</p>
+            <div class="content">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <!--Bagian Pihak Pengaju Proposal-->
+
+                    <h1 class="heading">Pengaju Proposal</h1>
+                    <div class="Detail-Pengaju">
+                        <div class="input-box">
+                            <span class="details">Nama</span>
+                            <input type="text" placeholder="Nama" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">NIM</span>
+                            <input type="text" placeholder="NIM" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Jurusan</span>
+                            <input type="text" placeholder="Jurusan" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Semester</span>
+                            <input type="text" placeholder="Semester" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Asal Instansi</span>
+                            <input type="text" placeholder="Asal Instansi" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">No.Telpon</span>
+                            <input type="tel" placeholder="No.Telpon" required>
+                        </div>
+                    </div>
+
+                    <!--Bagian Inti Proposal -->
+
+                    <h1 class="heading">Inti Proposal</h1>
+                    <div class="Detail-Proposal">
+                        <div class="input-box1">
+                            <span class="details">Judul Proposal</span>
+                            <input type="text" placeholder="Judul Proposal" required>
+                        </div>
+                        <div class="input-box1">
+                            <span class="details">Tujuan</span>
+                            <textarea name="content" id="editor" placeholder="Enter Your Details"></textarea>
+                        </div>
+                        <div class="input-box1">
+                            <span class="details">Tanggal Pelaksanaan</span>
+                            <input type="date" placeholder="Tanggal Pelaksanaan" required>
+                        </div>
+                        <div class="input-box1">
+                            <span class="details">Waktu Pelaksanaan</span>
+                            <input type="text" placeholder="Waktu Pelaksanaan" required>
+                        </div>
+                        <div class="input-box1">
+                            <span class="details">Lokasi Pelaksanaan</span>
+                            <input type="text" placeholder="Lokasi Pelaksanaan" required>
+                        </div>
+
+                        <!--Bagian RAB-->
+
+                        <h1 class="heading">Rencana Anggaran Biaya</h1>
+                        <div class="input-box1">
+                            <p class="deskripsi1">Silahkan input file Rencana Anggaran Biaya pada proposal dengan
+                                format
+                                excel di kolom penginputan.</p>
+                            <input type="file" class="upload-box" required>
+                        </div>
+
+                        <!--Bagian File Proposal-->
+
+                        <h1 class="heading">File Proposal</h1>
+                        <div class="input-box1">
+                            <p class="deskripsi1">Silahkan input file lengkap proposal yang akan diajukan dengan
+                                format pdf
+                                di kolom penginputan.</p>
+                            <input type="file" class="upload-box" required>
+                        </div>
+                        <div class="button">
+                            <input type="submit" value="Submit">
+                        </div>
+                    </div>
+
+                    <!--Script untuk textarea pada bagian Inti Proposal Tujuan-->
+
+                    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'))
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
+
                 </form>
-            </article>
-            <!-- ################################################################################################ -->
-        </section>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
+            </div>
+        </div>
+        <!-- ################################################################################################ -->
+    </section>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 {% endblock %}
