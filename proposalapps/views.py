@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from proposalapps.models import ketProposal
 
-from .forms import UserLogin, dataUserForm
+
+from .forms import UserLogin, ketProposalForm
 #=================================registrasi==========================================
 def login_page(request):
     if request.user.is_authenticated:
@@ -49,9 +51,19 @@ def home(request):
     return render(request, 'index.html', contex)
 
 def pengajuan(request):
-    proposal = dataUserForm()
+    if request.method == 'POST':
+        proposal = ketProposalForm(request.POST, request.FILES)
+        if proposal.is_valid():
+            proposal.save()
+            messages.success(request, "Proposal Telah Di Ajukan, Silahkan Tunggu Email Balasannya")
+            return redirect('home')
+    else:
+        proposal = ketProposalForm()
+        messages.success(request, "Proposal tidak terkirim")
+        
+
     contex={
-        'proposal':proposal
+        'proposal':proposal,
     }
 
     return render(request, 'input.html', contex)

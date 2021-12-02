@@ -4,11 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models import fields
 from .models import *
 
-class dataUserForm(forms.ModelForm):
-    class Meta:
-        model = dataUser
-        fields = '__all__'
-
 class ketProposalForm(forms.ModelForm):
     class Meta:
         model = ketProposal

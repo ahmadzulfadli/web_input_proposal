@@ -7,11 +7,6 @@
     <section>
         <!-- ################################################################################################ -->
         <style>
-            @charset "utf-8";
-
-            @import url("fontawesome-free/css/fontawesome-all.min.css");
-            @import url("framework.css");
-
             * {
                 margin: 0;
                 padding: 0;
@@ -70,6 +65,19 @@
                 border-bottom-width: 2px;
                 transition: all 0.3s ease;
             }
+
+            .Detail-Pengaju .input-box select {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
 
             .Detail-Pengaju .input-box input:focus,
             .Detail-Pengaju .input-box input:valid {
@@ -183,7 +191,7 @@
             <p class="deskripsi1">Silahkan mengisi bagian-bagian formulir pengajuan proposal sesuai langkah-langkah
                 pengisian untuk dapat diinput.</p>
             <div class="content">
-                <form action="#" method="POST">
+                <form action="#" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <!--Bagian Pihak Pengaju Proposal-->
 
@@ -191,27 +199,44 @@
                     <div class="Detail-Pengaju">
                         <div class="input-box">
                             <span class="details">Nama</span>
-                            <input type="text" placeholder="Nama" required>
+                            <input type="text" name="nama" placeholder="Nama" required>
                         </div>
                         <div class="input-box">
                             <span class="details">NIM</span>
-                            <input type="text" placeholder="NIM" required>
+                            <input type="text" name="nim" placeholder="NIM" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Jurusan</span>
-                            <input type="text" placeholder="Jurusan" required>
+                            <select name="jurusan" id="Jurusan">
+                                <option selected disabled>Pilih Jurusan</option>
+                                <option value="Teknik Elektro">Teknik Elektro</option>
+                                <option value="Teknik Informatika">Teknik Informatika</option>
+                                <option value="Teknik Industri">Teknik Industri</option>
+                                <option value="Sistem Informasi">Sistem Informasi</option>
+                                <option value="Matematika">Matematika</option>
+                            </select>
                         </div>
                         <div class="input-box">
                             <span class="details">Semester</span>
-                            <input type="text" placeholder="Semester" required>
+                            <input type="number" name="semester" min="1" max="14" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Asal Instansi</span>
-                            <input type="text" placeholder="Asal Instansi" required>
+                            <select name="asal_instansi" id="Instansi">
+                                <option selected disabled>Pilih Asal Instansi</option>
+                                <option value="DEMA">DEMA</option>
+                                <option value="SEMA">SEMA</option>
+                                <option value="Teknik Elektro">Teknik Elektro</option>
+                                <option value="Teknik Informatika">Teknik Informatika</option>
+                                <option value="Teknik Industri">Teknik Industri</option>
+                                <option value="Sistem Informasi">Sistem Informasi</option>
+                                <option value="Matematika">Matematika</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
                         </div>
                         <div class="input-box">
                             <span class="details">No.Telpon</span>
-                            <input type="tel" placeholder="No.Telpon" required>
+                            <input type="tel" name="noHP" placeholder="No.Telpon" required>
                         </div>
                     </div>
 
@@ -221,23 +246,23 @@
                     <div class="Detail-Proposal">
                         <div class="input-box1">
                             <span class="details">Judul Proposal</span>
-                            <input type="text" placeholder="Judul Proposal" required>
+                            <input type="text" name="judul" placeholder="Judul Proposal" required>
                         </div>
                         <div class="input-box1">
                             <span class="details">Tujuan</span>
-                            <textarea name="content" id="editor" placeholder="Enter Your Details"></textarea>
+                            <textarea id="editor" name="tujuan" placeholder="Enter Your Details"></textarea>
                         </div>
                         <div class="input-box1">
                             <span class="details">Tanggal Pelaksanaan</span>
-                            <input type="date" placeholder="Tanggal Pelaksanaan" required>
+                            <input type="date" name="tanggal_pelaksanaan" placeholder="Tanggal Pelaksanaan" required>
                         </div>
                         <div class="input-box1">
                             <span class="details">Waktu Pelaksanaan</span>
-                            <input type="text" placeholder="Waktu Pelaksanaan" required>
+                            <input type="text" name="waktu_pelaksanaan" placeholder="Waktu Pelaksanaan" required>
                         </div>
                         <div class="input-box1">
                             <span class="details">Lokasi Pelaksanaan</span>
-                            <input type="text" placeholder="Lokasi Pelaksanaan" required>
+                            <input type="text" name="lokasi_pelaksanaan" placeholder="Lokasi Pelaksanaan" required>
                         </div>
 
                         <!--Bagian RAB-->
@@ -247,7 +272,7 @@
                             <p class="deskripsi1">Silahkan input file Rencana Anggaran Biaya pada proposal dengan
                                 format
                                 excel di kolom penginputan.</p>
-                            <input type="file" class="upload-box" required>
+                            <input type="file" name="rab" class="upload-box" required>
                         </div>
 
                         <!--Bagian File Proposal-->
@@ -257,7 +282,7 @@
                             <p class="deskripsi1">Silahkan input file lengkap proposal yang akan diajukan dengan
                                 format pdf
                                 di kolom penginputan.</p>
-                            <input type="file" class="upload-box" required>
+                            <input type="file" name="file_proposal" class="upload-box" required>
                         </div>
                         <div class="button">
                             <input type="submit" value="Submit">
@@ -277,6 +302,11 @@
                     </script>
 
                 </form>
+                {% for pesan in messages %}
+                <script>
+                    alert("{{pesan}}");
+                </script>
+                {% endfor %}
             </div>
         </div>
         <!-- ################################################################################################ -->
