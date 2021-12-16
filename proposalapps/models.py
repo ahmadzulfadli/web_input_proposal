@@ -6,7 +6,7 @@ class ketProposal(models.Model):
     nama = models.CharField(max_length=50)
     nim = models.CharField(max_length=50)
     jurusan = models.CharField(max_length=20)
-    semester = models.IntegerField( default=1)
+    semester = models.CharField(max_length=50)
     asal_instansi = models.CharField(max_length=50, default="", null=True)
     noHP = models.CharField(max_length=50)
     judul = models.CharField(max_length=50)

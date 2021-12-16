@@ -11,6 +11,7 @@ urlpatterns = [
     path('panduan/', panduan, name="panduan"),
 
     path('login/', login_page, name="login"),
+    path('login1/', login_page1, name="login1"),
     path('logout/', logout_page, name="logout"),
     path('registrasi/', registrasi, name="registrasi"),
 ]

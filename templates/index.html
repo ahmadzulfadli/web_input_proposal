@@ -13,7 +13,13 @@
                 selanjutnya
                 yang akan di kirim ke email si pemohon.
             </p>
-            <footer><a class="btn btn-primary" href="#pengajuan">Mulai Pengajuan</a></footer>
+            <div class="mt-5">
+                <a class="btn btn-dark" href="{% url 'login1' %}">Mulai Sebagai Kaprodi</a>
+                <a class="btn btn-dark  " href="{% url 'login1' %}">Mulai Sebagai W.Dekan3</a>
+            </div>
+            <footer>
+                <a class="btn btn-primary" href="#pengajuan">Mulai Pengajuan</a>
+            </footer>
         </article>
         <!-- ################################################################################################ -->
     </div>
@@ -29,35 +35,67 @@
         </div>
         <ul class="pr-charts nospace group center">
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="25"><i></i></div>
+                {% if jte > 0 %}
+                <div class="pr-chart" data-percent="{{jte}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Teknik Elektro</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="50"><i></i></div>
+                {% if jtif > 0 %}
+                <div class="pr-chart" data-percent="{{jtif}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Teknik Informatika</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="75"><i></i></div>
+                {% if jtin > 0 %}
+                <div class="pr-chart" data-percent="{{jtin}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Teknik Industri</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="25"><i></i></div>
+                {% if jsif > 0 %}
+                <div class="pr-chart" data-percent="{{jsif}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Sistem Informasi</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="50"><i></i></div>
+                {% if jmt > 0 %}
+                <div class="pr-chart" data-percent="{{jmt}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Matematika</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="75"><i></i></div>
+                {% if jsema > 0 %}
+                <div class="pr-chart" data-percent="{{jsema}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Sema</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="100"><i></i></div>
+                {% if jdema > 0 %}
+                <div class="pr-chart" data-percent="{{jdema}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Dema</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
-                <div class="pr-chart" data-percent="100"><i></i></div>
+                {% if jlainnya > 0 %}
+                <div class="pr-chart" data-percent="{{jlainnya}}"><i></i></div>
+                {% else %}
+                <div class="pr-chart" data-percent="0"><i></i></div>
+                {% endif %}
                 <p>Lainnya</p>
             </li>
         </ul>
