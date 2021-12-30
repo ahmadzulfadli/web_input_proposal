@@ -3,16 +3,22 @@ from django.urls import path
 from proposalapps.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home, name="home"),
+    path('', home, name="home"),
     path('input/', pengajuan, name="input"),
     path('panduan/', panduan, name="panduan"),
+    path('hasil_pengaju/', hasil_pengaju, name="hasil_pengaju"),
+    path('wakilDekan/', wakilDekan, name="wakilDekan"),
+    path('listproposalwd3/', listProposalwd3, name="listproposalwd3"),
+    path('viewswd3/', viewswd3, name="viewswd3"),
+    path('kaprodi/', kaprodi, name="kaprodi"),
+    path('viewskaprodi/', viewskaprodi, name="viewskaprodi"),
 
     path('login/', login_page, name="login"),
-    path('login1/', login_page1, name="login1"),
-    path('logout/', logout_page, name="logout"),
+    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('registrasi/', registrasi, name="registrasi"),
 ]
 if settings.DEBUG:

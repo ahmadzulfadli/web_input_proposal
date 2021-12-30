@@ -10,10 +10,14 @@ class ketProposal(models.Model):
     asal_instansi = models.CharField(max_length=50, default="", null=True)
     noHP = models.CharField(max_length=50)
     judul = models.CharField(max_length=50)
-    tujuan = models.TextField(max_length=1000)
+    tujuan = models.TextField(max_length=1200)
     tanggal_pelaksanaan = models.DateField(blank=True, null=True)
     waktu_pelaksanaan = models.CharField(max_length=50, default="")
     lokasi_pelaksanaan = models.CharField(max_length=50, default="")
     rab = models.FileField(blank=True)
     file_proposal = models.FileField(blank=True)
+
+class formatFile(models.Model):
+    formRab = models.FileField(blank=True)
+    formFile = models.FileField(blank=True)
     

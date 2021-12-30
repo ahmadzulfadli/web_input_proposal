@@ -1617,6 +1617,7 @@ table a,
 	.one_quarter,
 	.two_quarter,
 	.three_quarter {
+		
 		display: block;
 		float: none;
 		width: auto;

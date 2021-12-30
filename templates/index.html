@@ -14,8 +14,8 @@
                 yang akan di kirim ke email si pemohon.
             </p>
             <div class="mt-5">
-                <a class="btn btn-dark" href="{% url 'login1' %}">Mulai Sebagai Kaprodi</a>
-                <a class="btn btn-dark  " href="{% url 'login1' %}">Mulai Sebagai W.Dekan3</a>
+                <a class="btn btn-dark" href="{% url 'login' %}">Mulai Sebagai Kaprodi</a>
+                <a class="btn btn-dark  " href="{% url 'login' %}">Mulai Sebagai W.Dekan3</a>
             </div>
             <footer>
                 <a class="btn btn-primary" href="#pengajuan">Mulai Pengajuan</a>
@@ -80,7 +80,7 @@
                 {% else %}
                 <div class="pr-chart" data-percent="0"><i></i></div>
                 {% endif %}
-                <p>Sema</p>
+                <p>SEMA</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
                 {% if jdema > 0 %}
@@ -88,7 +88,7 @@
                 {% else %}
                 <div class="pr-chart" data-percent="0"><i></i></div>
                 {% endif %}
-                <p>Dema</p>
+                <p>DEMA</p>
             </li>
             <li class="pr-chart-ctrl" data-animate="false">
                 {% if jlainnya > 0 %}
@@ -96,7 +96,7 @@
                 {% else %}
                 <div class="pr-chart" data-percent="0"><i></i></div>
                 {% endif %}
-                <p>Lainnya</p>
+                <p>UKM-UKK</p>
             </li>
         </ul>
         <!-- ################################################################################################ -->
@@ -105,57 +105,165 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="bgded overlay light" id="pengajuan" style="background-image:url('images/demo/backgrounds/01.png');">
-    <section id="services" class="hoc container clear">
+<style>
+    .kotak1 {
+        margin: 0px;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        background: #B6C4D1;
+        padding-bottom: 100px;
+    }
+
+    .kotak2 {
+        width: 100%;
+        margin-top: 50px;
+        padding: 10px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-direction: column;
+        border-color: #fff;
+    }
+
+    .judul {
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        background: #B6C4D1;
+        width: 100%;
+        font-size: 2.5rem;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        margin-top: 25px;
+    }
+
+    .kotak {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 280px;
+        height: 150px;
+        color: #5c6464;
+        background: rgb(227, 235, 245);
+        border: solid;
+        margin: 10px 10px 10px 10px;
+        flex-direction: column;
+        box-shadow: 0 15px 20px rgb(222, 231, 227);
+        border-color: #fff;
+        border-radius: 20px;
+    }
+
+    .kotak article {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .kotak article a {
+        font-size: 28px;
+        font-weight: 500;
+        color: black;
+        min-width: 140px;
+        height: 140px;
+        text-align: center;
+        transition: 0.8s;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .kotak:hover,
+    .kotak article a:hover {
+        color: #FFF;
+        background: linear-gradient(135deg, #a0a0a0, #b3cfd3);
+        border-radius: 20px;
+    }
+
+    .kotak::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background: #769cc5;
+        z-index: -1;
+        transition: 0.8s;
+        top: 0;
+    }
+</style>
+
+<div id="pengajuan" class="kotak1">
+    <section class="kotak2">
         <!-- ################################################################################################ -->
-        <div class="sectiontitle">
-            <h6 class="heading font-x3">Pilih Menu Sesuai Jurusan Atau Lembaga Anda</h6>
+        <div class="judul">
+            <h6 class="heading font-x2">Pilih Menu Sesuai Jurusan Atau Lembaga Anda</h6>
         </div>
-        <ul class="nospace group elements elements-three">
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Teknik Elektro</h6>
+        <ul class="list">
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class="fas fa-th-large mb-3"></i>
+                        <h6 class="heading">Teknik Elektro</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Teknik Informatika</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">Teknik Informatika</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Teknik Industri</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">Teknik Industri</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Sistem Informasi</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">Sistem Informasi</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Matematika</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">Matematika</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Sema</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">SEMA</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Dema</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">DEMA</h6>
+                    </a>
                 </article>
             </li>
-            <li class="one_third">
-                <article><a href="{% url 'login' %}"><i class="fas fa-tty"></i></a>
-                    <h6 class="heading">Lainnya</h6>
+            <li class="kotak">
+                <article><a style="text-decoration:none" href="{% url 'login' %}"><i class='fas fa-th-large mb-3'></i>
+                        <h6 class="heading">UKM-UKK</h6>
+                    </a>
                 </article>
             </li>
         </ul>
         <!-- ################################################################################################ -->
     </section>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    {% endblock %}
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+{% endblock %}

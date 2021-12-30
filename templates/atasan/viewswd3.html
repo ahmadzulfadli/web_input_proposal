@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+    <section>
+        <!-- ################################################################################################ -->
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                margin-bottom: 20px;
+                max-width: 1000px;
+                width: 100%;
+                background-color: #fff;
+                padding: 25px 30px;
+                border-radius: 5px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            .container .title {
+                margin-top: 100px;
+                font-size: 30px;
+                font-weight: 700;
+                position: relative;
+            }
+
+            .container .row {
+                font-size: 16px;
+            }
+
+            .file a {
+                margin: 15px;
+                width: auto;
+            }
+
+            .tanggapan p {
+                font-size: 20px;
+            }
+
+            .tanggapan h4 {
+                margin-top: 15px;
+                font-size: 17px;
+            }
+
+
+            @media(max-width: 459px) {
+                .container .content {
+                    flex-direction: column;
+                }
+            }
+        </style>
+        <div class="container">
+            <div class="title mb-5" style="text-align: center;">Keterangan Proposal</div>
+            <!--Bagian Pihak Pengaju Proposal-->
+            <h1 class="heading">Data Pengaju</h1>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Nama</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">NIM</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Jurusan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Semester</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Asal Organisasi</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">No. Telpon</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+
+            <!--Bagian Pihak Pengaju Proposal-->
+            <h1 class="heading mt-4">Proposal</h1>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Judul</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Laudantium officiis fuga perspiciatis, nemo molestiae dolore laborum mollitia
+                    asperiores dolorem consequuntur atque beatae.</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Tujuan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Doloremque, aspernatur vitae necessitatibus unde sapiente labore facilis quisquam
+                    consequatur corrupti, porro omnis id dignissimos neque molestiae reprehenderit perspiciatis magni
+                    temporibus debitis consequuntur nam, officia corporis.</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Tanggal Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Lokasi Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Ahmad Zulfadli</div>
+            </div>
+
+
+            <!--Bagian RAB-->
+            <div class="file">
+                <h1 class="heading mt-4 mb-2">Rencana Anggaran Biaya</h1>
+                <div class="row">
+                    <embed type="application/pdf" src="#" width="auto" height="600"></embed>
+                    <a href="#" class="btn btn-info">Download File</a>
+                </div>
+            </div>
+
+
+            <!--Bagian File Proposal-->
+            <div class="file">
+                <h1 class="heading mt-2 mb-2">File Proposal</h1>
+                <div class="row">
+                    <embed type="application/pdf" src="#" width="auto" height="600"></embed>
+                    <a href="#" class="btn btn-info">Download File</a>
+                </div>
+            </div>
+
+            <!--Tombol-->
+
+            <div class="mt-3 tanggapan">
+                <p>Kirim Tanggapan</p>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Kirim Komentar</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="button" class="btn btn-secondary">Revisi</button>
+                <button type="button" class="btn btn-success">Terima</button>
+                <a href="{% url 'listproposalwd3' %}" class="btn btn-danger">Kembali</a>
+                <h4>Tanggapan anda akan dikirim kepada e-mail si pengaju.</h4>
+            </div>
+
+
+        </div>
+        <!-- ################################################################################################ -->
+    </section>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+{% endblock %}
