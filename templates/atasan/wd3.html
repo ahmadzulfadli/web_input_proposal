@@ -50,7 +50,7 @@
         width: 280px;
         height: 150px;
         color: #5c6464;
-        background: rgb(227, 235, 245);
+        background: rgb(255, 255, 255);
         border: solid;
         margin: 10px 10px 10px 10px;
         flex-direction: column;
@@ -77,11 +77,12 @@
         align-items: center;
         display: flex;
         flex-direction: column;
-        background: #E3EBF5 ;
+        background: rgb(255, 255, 255);
     }
-
-    .kotak:hover,
     .kotak article button:hover {
+        border-radius: 20px;
+    }
+    .kotak:hover {
         color: #FFF;
         background: linear-gradient(135deg, #a0a0a0, #b3cfd3);
         border-radius: 20px;
@@ -129,10 +130,10 @@
         </div>
         <ul class="list">
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="te" style="border:none">
+                        <button type="submit" name="system" value="te" style="border:none">
                             <i class="fas fa-th-large mb-3"></i>
                             <h6 class="heading">Teknik Elektro</h6>
                             {% if te %}
@@ -143,24 +144,24 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="tif" style="border:none">
+                        <button type="submit" name="system" value="tif" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">Teknik Informatika</h6>
                             {% if tif %}
                             <div class="notif" data="{{tif}}"></div>
                             {% endif %}
-                        </a>
+                        </button>
                     </article>
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="tin" style="border:none">
+                        <button type="submit" name="system" value="tin" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">Teknik Industri</h6>
                             {% if tin %}
@@ -171,10 +172,10 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="sif" style="border:none">
+                        <button type="submit" name="system" value="sif" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">Sistem Informasi</h6>
                             {% if sif %}
@@ -185,10 +186,10 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="mt" style="border:none">
+                        <button type="submit" name="system" value="mt" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">Matematika</h6>
                             {% if mt %}
@@ -199,10 +200,10 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="sema" style="border:none">
+                        <button type="submit" name="system" value="sema" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">SEMA</h6>
                             {% if sema %}
@@ -213,10 +214,10 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/">
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="dema" style="border:none">
+                        <button type="submit" name="system" value="dema" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">DEMA</h6>
                             {% if dema %}
@@ -227,10 +228,10 @@
                 </form>
             </li>
             <li class="kotak">
-                <form method="POST">
+                <form method="POST" action="/listproposalwd3/"> 
                     {% csrf_token %}
                     <article>
-                        <button type="submit" name="lainnya" style="border:none">
+                        <button type="submit" name="system" value="lainnya" style="border:none">
                             <i class='fas fa-th-large mb-3'></i>
                             <h6 class="heading">UKM-UKK</h6>
                             {% if lainnya %}

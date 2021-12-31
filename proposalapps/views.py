@@ -125,33 +125,8 @@ def wakilDekan(request):
     mt = ketProposal.objects.filter(asal_instansi="Matematika").count()
     lainnya = ketProposal.objects.filter(asal_instansi="Lainnya").count()
 
-    if request.method == 'POST' and 'te' in request.POST:
-        print("teknik elektro")
+    if request.method == 'POST':
         return redirect('listproposalwd3')
-
-    elif request.method == 'POST' and 'tif' in request.POST:
-        print("teknik informatika")
-        return redirect('listproposalwd3')
-
-    elif request.method == 'POST' and 'tin' in request.POST:
-        print("teknik industri")
-        return redirect('listproposalwd3')
-
-    elif request.method == 'POST' and 'sif' in request.POST:
-        print("sistem informasi")
-
-    elif request.method == 'POST' and 'mt' in request.POST:
-        print("matematika")
-
-    elif request.method == 'POST' and 'sema' in request.POST:
-        print("sema")
-
-    elif request.method == 'POST' and 'dema' in request.POST:
-        print("dema")
-
-    elif request.method == 'POST' and 'lainnya' in request.POST:
-        print("lainnya")
-        
     else:
         print("error")
 
@@ -169,32 +144,29 @@ def wakilDekan(request):
     return render(request, 'atasan/wd3.html', contex)
 
 def listProposalwd3(request):
-    if request.method == 'POST' and 'te' in request.POST:
-        print("teknik elektro")
-        proposal = ketProposal.objects.filter(asal_instansi="Teknik Elektro")
-        return proposal
-    elif request.method == 'POST' and 'tif' in request.POST:
-        print("teknik informatika")
-        proposal = ketProposal.objects.filter(asal_instansi="Teknik Informatika")
-        return proposal
-    elif request.method == 'POST' and 'tin' in request.POST:
-        print("teknik industri")
-        proposal = ketProposal.objects.filter(asal_instansi="Teknik Industri")
-        return proposal
-    elif request.method == 'POST' and 'sif' in request.POST:
-        print("sistem informasi")
-    elif request.method == 'POST' and 'mt' in request.POST:
-        print("matematika")
-    elif request.method == 'POST' and 'sema' in request.POST:
-        print("sema")
-    elif request.method == 'POST' and 'dema' in request.POST:
-        print("dema")
-    elif request.method == 'POST' and 'lainnya' in request.POST:
-        print("lainnya")
+    model = None
+    system = request.POST.get('system', None)
+    if system == 'te':
+        model = ketProposal.objects.filter(asal_instansi="Teknik Elektro")
+    elif system == 'tif':
+        model = ketProposal.objects.filter(asal_instansi="Teknik Informatika")
+    elif system == 'tin':
+        model = ketProposal.objects.filter(asal_instansi="Teknik Industri")
+    elif system == 'sif':
+        model = ketProposal.objects.filter(asal_instansi="Sistem Informasi")
+    elif system == 'mt':
+        model = ketProposal.objects.filter(asal_instansi="Matematika")
+    elif system == 'sema':
+        model = ketProposal.objects.filter(asal_instansi="SEMA")
+    elif system == 'dema':
+        model = ketProposal.objects.filter(asal_instansi="DEMA")
+    elif system == 'lainnya':
+        model = ketProposal.objects.filter(asal_instansi="Lainnya")
     else:
-        print("error")
+        return redirect('listproposalwd3')
 
     contex = {
+        'model':model,
     }
 
     return render(request, 'atasan/list_proposalwd3.html', contex)

@@ -175,40 +175,15 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
+                        {% for model in model %}
+                        <td>{{ forloop.revcounter }}</td>
+                        <td>{{model.judul}}</td>
+                        <td>{{model.asal_instansi}}</td>
+                        <td>aaaaaaaaaaaaxs</td>
                         <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Lihat</a></td>
                         <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
                         <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
+                        {% endfor %}
                     </tr>
                 </tbody>
             </table>

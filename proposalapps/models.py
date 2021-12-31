@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-
+from django.utils import timezone
 
 class ketProposal(models.Model):
     nama = models.CharField(max_length=50)
@@ -16,6 +16,9 @@ class ketProposal(models.Model):
     lokasi_pelaksanaan = models.CharField(max_length=50, default="")
     rab = models.FileField(blank=True)
     file_proposal = models.FileField(blank=True)
+
+    published = models.DateField(auto_now_add=True)
+    updated   = models.TimeField(auto_now=True)
 
 class formatFile(models.Model):
     formRab = models.FileField(blank=True)
