@@ -242,15 +242,19 @@
                             <span class="details">Asal Instansi</span>
                             <select name="asal_instansi" id="Instansi">
                                 <option selected disabled>Pilih Asal Instansi</option>
-                                <option value="DEMA">DEMA</option>
-                                <option value="SEMA">SEMA</option>
-                                <option value="Teknik Elektro">Teknik Elektro</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Teknik Industri">Teknik Industri</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
-                                <option value="Matematika">Matematika</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value=1>Teknik Elektro</option>
+                                <option value=2>Teknik Informatika</option>
+                                <option value=3>Teknik Industri</option>
+                                <option value=4>Sistem Informasi</option>
+                                <option value=5>Matematika</option>
+                                <option value=7 >DEMA</option>
+                                <option value=6>SEMA</option>
+                                <option value=8>Lainnya</option>
                             </select>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input type="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="input-box">
                             <span class="details">No.Telpon</span>
@@ -287,8 +291,7 @@
 
                         <h1 class="heading">Rencana Anggaran Biaya</h1>
                         <div class="input-box1">
-                            <p class="deskripsi1">Silahkan input file Rencana Anggaran Biaya pada proposal dengan
-                                format excel di kolom penginputan. formatnya dapat di download <a href="#">Disini</a></p>
+                            <p class="deskripsi1">Silahkan upload RAB. format file dapat di download <a href="#">Disini</a></p>
                             <input type="file" name="rab" class="upload-box" required>
                         </div>
 
@@ -296,8 +299,7 @@
 
                         <h1 class="heading">File Proposal</h1>
                         <div class="input-box1">
-                            <p class="deskripsi1">Silahkan input file lengkap proposal yang akan diajukan dengan
-                                format pdf di kolom penginputan. formatnya dapat di download <a href="#">Disini</a></p>
+                            <p class="deskripsi1">Silahkan upload File Proposal. format file dapat di download <a href="#">Disini</a></p>
                             <input type="file" name="file_proposal" class="upload-box" required>
                         </div>
                         <div class="button">

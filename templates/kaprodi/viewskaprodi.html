@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_kaprodi.html' %}
 {% block content %}
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -58,54 +58,54 @@
         <div class="container">
             <div class="title mb-5" style="text-align: center;">Keterangan Proposal</div>
             <!--Bagian Pihak Pengaju Proposal-->
+            {% if model %}
             <h1 class="heading">Data Pengaju</h1>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Nama</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.nama }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">NIM</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.nim }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Jurusan</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.jurusan }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Semester</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.semester }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Asal Organisasi</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.asal_instansi }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">No. Telpon</div>
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ model.noHP }}</div>
             </div>
 
             <!--Bagian Pihak Pengaju Proposal-->
             <h1 class="heading mt-4">Proposal</h1>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Judul</div>
-                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Laudantium officiis fuga perspiciatis, nemo molestiae dolore laborum mollitia
-                    asperiores dolorem consequuntur atque beatae.</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ model.judul }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Tujuan</div>
-                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Doloremque, aspernatur vitae necessitatibus unde sapiente labore facilis quisquam
-                    consequatur corrupti, porro omnis id dignissimos neque molestiae reprehenderit perspiciatis magni
-                    temporibus debitis consequuntur nam, officia corporis.</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ model.tujuan }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Tanggal Pelaksanaan</div>
-                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ model.tanggal_pelaksanaan }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Waktu Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ model.waktu_pelaksanaan }}</div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-2 col-md-3">Lokasi Pelaksanaan</div>
-                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: Ahmad Zulfadli</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ model.lokasi_pelaksanaan }}</div>
             </div>
 
 
@@ -127,6 +127,7 @@
                     <a href="#" class="btn btn-info">Download File</a>
                 </div>
             </div>
+            {% endif %}
 
             <!--Tombol-->
 
@@ -136,9 +137,13 @@
                     <label for="exampleFormControlTextarea1" class="form-label">Kirim Komentar</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                <button type="button" class="btn btn-secondary">Revisi</button>
-                <button type="button" class="btn btn-success">Terima</button>
-                <a href="{% url 'kaprodi' %}" class="btn btn-danger">Kembali</a>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary" value="Revisi">Revisi</button>
+                    <button type="submit" class="btn btn-success" value="Diterima">Terima</button>
+                </form>
+                
+                <a href="{% url 'kaprodi' %}" class="btn btn-danger">Kembali Ke Halaman sebelumnya</a>
                 <h4>Tanggapan anda akan dikirim kepada e-mail si pengaju.</h4>
             </div>
 

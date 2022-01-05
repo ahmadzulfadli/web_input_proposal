@@ -27,11 +27,8 @@
                 <!-- ################################################################################################ -->
                 <ul class="clear">
                     {% if user.is_authenticated %}
-                        <li>
-                            <a class="nav-link text-white" href="{% url 'panduan' %}">Panduan</a>
-                        </li>
                         <li class="ms-5">
-                            <a class="nav-link text-white" href="{% url 'input' %}">pengajuan</a>
+                            <a class="nav-link text-white" href="{% url 'wakilDekan' %}">Proposal</a>
                         </li>
                         <li class="ms-5">
                             <a class="nav-link text-white" href="{% url 'logout' %}">Keluar</a>

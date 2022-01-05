@@ -13,9 +13,9 @@ urlpatterns = [
     path('hasil_pengaju/', hasil_pengaju, name="hasil_pengaju"),
     path('wakilDekan/', wakilDekan, name="wakilDekan"),
     path('listproposalwd3/', listProposalwd3, name="listproposalwd3"),
-    path('viewswd3/', viewswd3, name="viewswd3"),
+    path('viewswd3/<str:id>/', viewswd3, name="viewswd3"),
     path('kaprodi/', kaprodi, name="kaprodi"),
-    path('viewskaprodi/', viewskaprodi, name="viewskaprodi"),
+    path('viewskaprodi/<str:id>/', viewskaprodi, name="viewskaprodi"),
 
     path('login/', login_page, name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),

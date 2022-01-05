@@ -1,14 +1,14 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import View
-from django.views.generic.base import TemplateView
+from django.http import FileResponse
 from django.contrib.auth.models import User, Group
+from django.db.models import Count
 
-from proposalapps.models import ketProposal
-
-from .forms import UserLogin, ketProposalForm
+from .models import *
+from .forms import *
 
 #-------------------------------------------------------------------------------------
 #=================================registrasi==========================================
@@ -55,14 +55,15 @@ def home(request):
     jumlah = ketProposal.objects.count()
 
     if(jumlah > 0):
-        sema = ketProposal.objects.filter(asal_instansi="SEMA").count()
-        dema = ketProposal.objects.filter(asal_instansi="DEMA").count()
-        te = ketProposal.objects.filter(asal_instansi="Teknik Elektro").count()
-        tif = ketProposal.objects.filter(asal_instansi="Teknik Informatika").count()
-        tin = ketProposal.objects.filter(asal_instansi="Teknik Industri").count()
-        sif = ketProposal.objects.filter(asal_instansi="Sistem Informasi").count()
-        mt = ketProposal.objects.filter(asal_instansi="Matematika").count()
-        lainnya = ketProposal.objects.filter(asal_instansi="Lainnya").count()
+        
+        te = ketProposal.objects.filter(asal_instansi=1).count()
+        tif = ketProposal.objects.filter(asal_instansi=2).count()
+        tin = ketProposal.objects.filter(asal_instansi=3).count()
+        sif = ketProposal.objects.filter(asal_instansi=4).count()
+        mt = ketProposal.objects.filter(asal_instansi=5).count()
+        sema = ketProposal.objects.filter(asal_instansi=6).count()
+        dema = ketProposal.objects.filter(asal_instansi=7).count()
+        lainnya = ketProposal.objects.filter(asal_instansi=8).count()
 
         contex = {
             'jsema':round(sema/jumlah*100),
@@ -109,37 +110,34 @@ def hasil_pengaju(request):
 
     return render(request, 'hasil_pengaju.html', contex)
 
-
 #=====================================================================================
 #-------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------
 #=================================template wd3========================================
 def wakilDekan(request):
-    sema = ketProposal.objects.filter(asal_instansi="SEMA").count()
-    dema = ketProposal.objects.filter(asal_instansi="DEMA").count()
-    te = ketProposal.objects.filter(asal_instansi="Teknik Elektro").count()
-    tif = ketProposal.objects.filter(asal_instansi="Teknik Informatika").count()
-    tin = ketProposal.objects.filter(asal_instansi="Teknik Industri").count()
-    sif = ketProposal.objects.filter(asal_instansi="Sistem Informasi").count()
-    mt = ketProposal.objects.filter(asal_instansi="Matematika").count()
-    lainnya = ketProposal.objects.filter(asal_instansi="Lainnya").count()
+    sema = ketProposal.objects.filter(asal_instansi=6).count()
+    dema = ketProposal.objects.filter(asal_instansi=7).count()
+    lainnya = ketProposal.objects.filter(asal_instansi=8).count()
 
-    if request.method == 'POST':
-        return redirect('listproposalwd3')
-    else:
-        print("error")
+    te = ketProposal.objects.filter(asal_instansi=1, keterangan=2)
+    tif = ketProposal.objects.filter(asal_instansi=2, keterangan=2)
+    tin = ketProposal.objects.filter(asal_instansi=3, keterangan=2)
+    sif = ketProposal.objects.filter(asal_instansi=4, keterangan=2)
+    mt = ketProposal.objects.filter(asal_instansi=5, keterangan=2)
 
     contex = {
         'sema':sema,
         'dema':dema,
-        'te':te,
-        'tif':tif,
-        'tin':tin,
-        'sif':sif,
-        'mt':mt,
+        'te':te.count(),
+        'tif':tif.count(),
+        'tin':tin.count(),
+        'sif':sif.count(),
+        'mt':mt.count(),
         'lainnya':lainnya,
     }
+    if request.method == 'POST':
+        return redirect('listproposalwd3')
 
     return render(request, 'atasan/wd3.html', contex)
 
@@ -147,21 +145,21 @@ def listProposalwd3(request):
     model = None
     system = request.POST.get('system', None)
     if system == 'te':
-        model = ketProposal.objects.filter(asal_instansi="Teknik Elektro")
+        model = ketProposal.objects.filter(asal_instansi=1, keterangan=2)
     elif system == 'tif':
-        model = ketProposal.objects.filter(asal_instansi="Teknik Informatika")
+        model = ketProposal.objects.filter(asal_instansi=2, keterangan=2)
     elif system == 'tin':
-        model = ketProposal.objects.filter(asal_instansi="Teknik Industri")
+        model = ketProposal.objects.filter(asal_instansi=3, keterangan=2)
     elif system == 'sif':
-        model = ketProposal.objects.filter(asal_instansi="Sistem Informasi")
+        model = ketProposal.objects.filter(asal_instansi=4, keterangan=2)
     elif system == 'mt':
-        model = ketProposal.objects.filter(asal_instansi="Matematika")
+        model = ketProposal.objects.filter(asal_instansi=5, keterangan=2)
     elif system == 'sema':
-        model = ketProposal.objects.filter(asal_instansi="SEMA")
+        model = ketProposal.objects.filter(asal_instansi=6)
     elif system == 'dema':
-        model = ketProposal.objects.filter(asal_instansi="DEMA")
+        model = ketProposal.objects.filter(asal_instansi=7)
     elif system == 'lainnya':
-        model = ketProposal.objects.filter(asal_instansi="Lainnya")
+        model = ketProposal.objects.filter(asal_instansi=8)
     else:
         return redirect('listproposalwd3')
 
@@ -171,8 +169,12 @@ def listProposalwd3(request):
 
     return render(request, 'atasan/list_proposalwd3.html', contex)
 
-def viewswd3(request):
-    contex = {}
+def viewswd3(request, id):
+    model = get_object_or_404(ketProposal, id=id)
+
+    contex = {
+        'model': model,
+    }
 
     return render(request, 'atasan/viewswd3.html', contex)
 
@@ -182,12 +184,42 @@ def viewswd3(request):
 #-------------------------------------------------------------------------------------
 #=================================template kaprodi====================================
 def kaprodi(request):
-    contex = {}
+    #list proposal
+    if request.user.groups.filter(name = 'te').exists():
+        model = ketProposal.objects.filter(asal_instansi=1)
+    elif request.user.groups.filter(name = 'tif').exists():
+        model = ketProposal.objects.filter(asal_instansi=2)
+    elif request.user.groups.filter(name = 'tin').exists():
+        model = ketProposal.objects.filter(asal_instansi=3)
+    elif request.user.groups.filter(name = 'sif').exists():
+        model = ketProposal.objects.filter(asal_instansi=4)
+    elif request.user.groups.filter(name = 'mt').exists():
+        model = ketProposal.objects.filter(asal_instansi=5)
+    else:
+        print("error")
+
+    contex = {
+        'model':model,
+    }
 
     return render(request, 'kaprodi/kaprodi.html', contex)
 
-def viewskaprodi(request):
-    contex = {}
+def viewskaprodi(request, id):
+    model = get_object_or_404(ketProposal, id=id)
+    if request.method == 'POST':
+        proposal = statusForm(request.POST, request.FILES)
+        if proposal.is_valid():
+            proposal.save()
+            messages.success(request, "Proposal Telah Di Ajukan, Silahkan Tunggu Email Balasannya")
+            return redirect('hasil_pengaju')
+        else:
+             messages.success(request, "Proposal tidak terkirim")
+    else:
+        proposal = statusForm()
+
+    contex = {
+        'model': model,
+    }
 
     return render(request, 'kaprodi/viewskaprodi.html', contex)
 #=====================================================================================

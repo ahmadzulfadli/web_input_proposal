@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_kaprodi.html' %}
 {% block content %}
 <style>
     @charset "utf-8";
@@ -147,7 +147,8 @@
     <section id="services" class="container">
         <!-- ################################################################################################ -->
         <div class="judul">
-            <h2>List Proposal Kegiatan Organisasi </br> Fakultas Sains Dan Teknologi</h2>
+            <h2>List Proposal Kegiatan Organisasi </br> Fakultas Sains Dan Teknologi 
+            </br>Program Studi {% for data in model|slice:":1" %}{{data.asal_instansi}}{% endfor %} </h2>
         </div>
 
         <div class="jumlah mt-3">
@@ -174,115 +175,22 @@
         <div class="container list">
             <table>
                 <tbody>
+                    {% for data in model %}
                     <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{data.judul}}</td>
+                        <td>{{data.asal_instansi}}</td>
+                        <td>{{data.published1}} - {{data.updated1}}</td>
+                        <td><a href="{% url 'viewskaprodi' data.id %}" class="btn btn-light">Lihat</a></td>
+                        <td><a href="#" class="btn btn-light">Hapus</a></td>
                         <td><a href="#" class="btn btn-light">Status Revisi</a></td>
                     </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
-                    <tr>
-                        <td>1.</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aliquid, non,
-                            illum fugit
-                            laboriosam natus suscipit facere vitae nisi, ipsa exercitationem? Tempore harum ducimus
-                            ad
-                            voluptatum quo deleniti architecto sint?</td>
-                        <td>User 1</td>
-                        <td>20 Desember 2021</td>
-                        <td><a href="{% url 'viewskaprodi' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div>
-            <a href="{% url 'home' %}" class="btn btn-danger mt-4 ms-5">Kembali Ke Home</a>
+            <a href="{% url 'home' %}" class="btn btn-danger mt-4 ms-5">Kembali Ke Halaman sebelumnya</a>
         </div>
         <!-- ################################################################################################ -->
     </section>

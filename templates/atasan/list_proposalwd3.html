@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_wd.html' %}
 {% block content %}
 <style>
     @charset "utf-8";
@@ -174,22 +174,22 @@
         <div class="container list">
             <table>
                 <tbody>
+                    {% for data in model %}
                     <tr>
-                        {% for model in model %}
-                        <td>{{ forloop.revcounter }}</td>
-                        <td>{{model.judul}}</td>
-                        <td>{{model.asal_instansi}}</td>
-                        <td>aaaaaaaaaaaaxs</td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="{% url 'viewswd3' %}" class="btn btn-light">Hapus</a></td>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.judul}}</td>
+                        <td>{{data.asal_instansi}}</td>
+                        <td>{{data.published1}} - {{data.updated1}}</td>
+                        <td><a href="{% url 'viewswd3' data.id %}" class="btn btn-light">Lihat</a></td>
+                        <td><a href="#" class="btn btn-light">Hapus</a></td>
                         <td><a href="#" class="btn btn-light">Status Revisi</a></td>
-                        {% endfor %}
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div>
-            <a href="{% url 'wakilDekan' %}" class="btn btn-danger mt-4 ms-5">Kembali Ke Home</a>
+            <a href="{% url 'wakilDekan' %}" class="btn btn-danger mt-4 ms-5">Kembali Ke Halaman Sebelumnya</a>
         </div>
         <!-- ################################################################################################ -->
     </section>
