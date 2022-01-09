@@ -158,10 +158,12 @@
 
         <div class="jumlah mb-5">
             <div class="row row-cols-2">
+                {% for data in model|slice:":1" %}
                 <div class="col">Masuk</div>
-                <div class="col">= 2</div>
+                <div class="col">= {{jum}}</div>
                 <div class="col">Diterima</div>
-                <div class="col">= 2</div>
+                <div class="col">= {{acc}}</div>
+                {% endfor %}
             </div>
         </div>
 
@@ -181,8 +183,7 @@
                         <td>{{data.asal_instansi}}</td>
                         <td>{{data.published1}} - {{data.updated1}}</td>
                         <td><a href="{% url 'viewswd3' data.id %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="#" class="btn btn-light">Hapus</a></td>
-                        <td><a href="#" class="btn btn-light">Status Revisi</a></td>
+                        <td><a href="#" class="btn btn-light">Status : {{data.keterangan_wd3}}</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

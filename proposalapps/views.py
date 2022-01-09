@@ -3,9 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import View
-from django.http import FileResponse
-from django.contrib.auth.models import User, Group
-from django.db.models import Count
+from django.http import FileResponse, HttpResponse
+from django.core.mail import send_mail
+from input_proposal.settings import EMAIL_HOST_USER
+from django.core.files.storage import FileSystemStorage
+import os
+from input_proposal import settings
 
 from .models import *
 from .forms import *
@@ -33,6 +36,7 @@ def login_page(request):
             messages.info(request, 'Username Atau Password Salah')
     return render(request, 'user/login.html') 
 
+'''
 def registrasi(request):
     form = UserLogin()
     if request.method == 'POST':
@@ -46,6 +50,8 @@ def registrasi(request):
         'form':form,
     }
     return render(request, 'user/registrasi.html', contex) 
+'''
+
 #=====================================================================================
 #-------------------------------------------------------------------------------------
 
@@ -89,8 +95,14 @@ def panduan(request):
 def pengajuan(request):
     if request.method == 'POST':
         proposal = ketProposalForm(request.POST, request.FILES)
+        email = request.POST.get('email',None)
         if proposal.is_valid():
+            upload_file = request.FILES['rab']
+            fs = FileSystemStorage()
+            fs.save(upload_file.name , upload_file)
             proposal.save()
+            pesan = "Proposal anda telah terkirim, silahkan tunggu email selanjutnya untuk mengetahui perkembangan proposal anda. Terimakasih"
+            send_mail('Terkirim(Pengajuan Proposal FST)',pesan,EMAIL_HOST_USER, [email],fail_silently=False,)
             messages.success(request, "Proposal Telah Di Ajukan, Silahkan Tunggu Email Balasannya")
             return redirect('hasil_pengaju')
         else:
@@ -105,8 +117,8 @@ def pengajuan(request):
     return render(request, 'input.html', contex)
 
 def hasil_pengaju(request):
-    
-    contex={}
+    contex={
+    }
 
     return render(request, 'hasil_pengaju.html', contex)
 
@@ -116,15 +128,15 @@ def hasil_pengaju(request):
 #-------------------------------------------------------------------------------------
 #=================================template wd3========================================
 def wakilDekan(request):
-    sema = ketProposal.objects.filter(asal_instansi=6).count()
-    dema = ketProposal.objects.filter(asal_instansi=7).count()
-    lainnya = ketProposal.objects.filter(asal_instansi=8).count()
+    sema = ketProposal.objects.filter(asal_instansi=6, keterangan_wd3=1).count()
+    dema = ketProposal.objects.filter(asal_instansi=7, keterangan_wd3=1).count()
+    lainnya = ketProposal.objects.filter(asal_instansi=8, keterangan_wd3=1).count()
 
-    te = ketProposal.objects.filter(asal_instansi=1, keterangan=2)
-    tif = ketProposal.objects.filter(asal_instansi=2, keterangan=2)
-    tin = ketProposal.objects.filter(asal_instansi=3, keterangan=2)
-    sif = ketProposal.objects.filter(asal_instansi=4, keterangan=2)
-    mt = ketProposal.objects.filter(asal_instansi=5, keterangan=2)
+    te = ketProposal.objects.filter(asal_instansi=1, keterangan_kaprodi=2, keterangan_wd3=1)
+    tif = ketProposal.objects.filter(asal_instansi=2, keterangan_kaprodi=2, keterangan_wd3=1)
+    tin = ketProposal.objects.filter(asal_instansi=3, keterangan_kaprodi=2, keterangan_wd3=1)
+    sif = ketProposal.objects.filter(asal_instansi=4, keterangan_kaprodi=2, keterangan_wd3=1)
+    mt = ketProposal.objects.filter(asal_instansi=5, keterangan_kaprodi=2, keterangan_wd3=1)
 
     contex = {
         'sema':sema,
@@ -145,15 +157,15 @@ def listProposalwd3(request):
     model = None
     system = request.POST.get('system', None)
     if system == 'te':
-        model = ketProposal.objects.filter(asal_instansi=1, keterangan=2)
+        model = ketProposal.objects.filter(asal_instansi=1, keterangan_kaprodi=2)
     elif system == 'tif':
-        model = ketProposal.objects.filter(asal_instansi=2, keterangan=2)
+        model = ketProposal.objects.filter(asal_instansi=2, keterangan_kaprodi=2)
     elif system == 'tin':
-        model = ketProposal.objects.filter(asal_instansi=3, keterangan=2)
+        model = ketProposal.objects.filter(asal_instansi=3, keterangan_kaprodi=2)
     elif system == 'sif':
-        model = ketProposal.objects.filter(asal_instansi=4, keterangan=2)
+        model = ketProposal.objects.filter(asal_instansi=4, keterangan_kaprodi=2)
     elif system == 'mt':
-        model = ketProposal.objects.filter(asal_instansi=5, keterangan=2)
+        model = ketProposal.objects.filter(asal_instansi=5, keterangan_kaprodi=2)
     elif system == 'sema':
         model = ketProposal.objects.filter(asal_instansi=6)
     elif system == 'dema':
@@ -165,12 +177,29 @@ def listProposalwd3(request):
 
     contex = {
         'model':model,
+        'jum':model.count(),
+        'acc':model.filter(keterangan_wd3 = 2).count(),
     }
 
     return render(request, 'atasan/list_proposalwd3.html', contex)
 
 def viewswd3(request, id):
     model = get_object_or_404(ketProposal, id=id)
+
+    email = model.email
+    system = request.POST.get('system', None)
+    pesan = request.POST.get('pesan', None)
+
+    if system == 'revisi':
+        model.keterangan_wd3_id = 3
+        model.save(update_fields=['keterangan_wd3'])
+        send_mail('Revisi(Wakil Dekan III)', pesan,EMAIL_HOST_USER,[email],fail_silently=False,)
+        return redirect('wakilDekan')
+    elif system == 'diterima':
+        model.keterangan_wd3_id = 2
+        model.save(update_fields=['keterangan_wd3'])
+        send_mail('Diterima(Wakil Dekan III)', pesan + '(Proposal sudah di ACC Wakil Dekan III Fakultas Sains dan Teknologi Universitas Islam Negri Sultan Syarif Kasim Riau, silahkan temui Wakil Dekan III untuk info lebih lanjut)',EMAIL_HOST_USER,[email],fail_silently=False,)
+        return redirect('wakilDekan')
 
     contex = {
         'model': model,
@@ -200,25 +229,39 @@ def kaprodi(request):
 
     contex = {
         'model':model,
+        'jum':model.count(),
+        'acc':model.filter(keterangan_kaprodi = 2).count(),
     }
 
     return render(request, 'kaprodi/kaprodi.html', contex)
 
 def viewskaprodi(request, id):
-    model = get_object_or_404(ketProposal, id=id)
-    if request.method == 'POST':
-        proposal = statusForm(request.POST, request.FILES)
-        if proposal.is_valid():
-            proposal.save()
-            messages.success(request, "Proposal Telah Di Ajukan, Silahkan Tunggu Email Balasannya")
-            return redirect('hasil_pengaju')
-        else:
-             messages.success(request, "Proposal tidak terkirim")
-    else:
-        proposal = statusForm()
+    model = ketProposal.objects.get(id=id)
+    
+    #menampilkan file pdf
+    fsock = open(model.rab.path, 'rb')
+    response = HttpResponse(fsock, content_type='application/pdf')
+
+    #menukar status
+    email = model.email
+    system = request.POST.get('system', None)
+    pesan = request.POST.get('pesan', None)
+    if system == 'revisi':
+        model.keterangan_kaprodi_id = 3
+        model.save(update_fields=['keterangan_kaprodi'])
+        send_mail('Revisi(Kaprodi)',pesan,EMAIL_HOST_USER, [email],fail_silently=False,)
+        return redirect('kaprodi')
+        
+    elif system == 'diterima':
+        model.keterangan_kaprodi_id = 2
+        model.save(update_fields=['keterangan_kaprodi'])
+        send_mail('Diterima(Kaprodi)',pesan + '(Proposal akan diserahkan ke Wakil Dekan III untuk pemeriksaan lebih lanjut)',EMAIL_HOST_USER, [email],fail_silently=False,)
+        return redirect('kaprodi')
+
 
     contex = {
         'model': model,
+        'response':response,
     }
 
     return render(request, 'kaprodi/viewskaprodi.html', contex)

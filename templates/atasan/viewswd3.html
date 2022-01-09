@@ -114,7 +114,7 @@
             <div class="file">
                 <h1 class="heading mt-4 mb-2">Rencana Anggaran Biaya</h1>
                 <div class="row">
-                    <embed type="application/pdf" src="#" width="auto" height="600"></embed>
+                    <embed type="application/pdf" src="{{response}}" width="auto" height="600"></embed>
                     <a href="#" class="btn btn-info">Download File</a>
                 </div>
             </div>
@@ -134,12 +134,23 @@
 
             <div class="mt-3 tanggapan">
                 <p>Kirim Tanggapan</p>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Kirim Komentar</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <button type="button" class="btn btn-secondary">Revisi</button>
-                <button type="button" class="btn btn-success">Terima</button>
+                
+                <form method="POST" class="mt-4">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Kirim Komentar</label>
+                        <textarea name="pesan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <ul style="font-size: 15px;">
+                        <li>Tombol Revisi : Sistem akan mengirim Email kepada si pengaju "Proposalnya direvisi"</li>
+                        <li>Tombol Terima : Sistem akan mengirim Email kepada si pengaju "Proposalnya diterima"</li>
+                        <li>Komentar akan selalu dikirim setiap kali tombol Revisi/Terima di tekan.</li>
+                    </ul>
+
+                    <button type="submit" name="system" class="btn btn-secondary mb-2 mb-4" value="revisi">Revisi</button>
+                    <button type="submit" name="system" class="btn btn-success mb-2 mb-4" value="diterima">Terima</button>
+                </form>
+                
                 <a href="{% url 'listproposalwd3' %}" class="btn btn-danger">Kembali Ke Halaman Sebelumnya</a>
                 <h4>Tanggapan anda akan dikirim kepada e-mail si pengaju.</h4>
             </div>
