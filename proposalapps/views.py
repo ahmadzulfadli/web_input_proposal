@@ -36,22 +36,6 @@ def login_page(request):
             messages.info(request, 'Username Atau Password Salah')
     return render(request, 'user/login.html') 
 
-'''
-def registrasi(request):
-    form = UserLogin()
-    if request.method == 'POST':
-        form = UserLogin(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'Akun Berhasil Di buat untuk ')
-            return redirect('home')
-
-    contex = {
-        'form':form,
-    }
-    return render(request, 'user/registrasi.html', contex) 
-'''
-
 #=====================================================================================
 #-------------------------------------------------------------------------------------
 
@@ -93,25 +77,25 @@ def panduan(request):
     return render(request, 'panduan.html', contex)
 
 def pengajuan(request):
+    model= get_object_or_404(formatFile)
     if request.method == 'POST':
         proposal = ketProposalForm(request.POST, request.FILES)
         email = request.POST.get('email',None)
+        nama= request.POST.get('nama',None)
         if proposal.is_valid():
-            upload_file = request.FILES['rab']
-            fs = FileSystemStorage()
-            fs.save(upload_file.name , upload_file)
             proposal.save()
-            pesan = "Proposal anda telah terkirim, silahkan tunggu email selanjutnya untuk mengetahui perkembangan proposal anda. Terimakasih"
+            pesan = "Hy "+ nama +" Proposal anda telah terkirim, silahkan tunggu email selanjutnya untuk mengetahui perkembangan proposal anda. Terimakasih"
             send_mail('Terkirim(Pengajuan Proposal FST)',pesan,EMAIL_HOST_USER, [email],fail_silently=False,)
             messages.success(request, "Proposal Telah Di Ajukan, Silahkan Tunggu Email Balasannya")
             return redirect('hasil_pengaju')
         else:
-             messages.success(request, "Proposal tidak terkirim")
+            messages.success(request, "Proposal tidak terkirim")
     else:
         proposal = ketProposalForm()
        
     contex={
         'proposal':proposal,
+        'model': model,
     }
 
     return render(request, 'input.html', contex)
@@ -239,8 +223,6 @@ def viewskaprodi(request, id):
     model = ketProposal.objects.get(id=id)
     
     #menampilkan file pdf
-    fsock = open(model.rab.path, 'rb')
-    response = HttpResponse(fsock, content_type='application/pdf')
 
     #menukar status
     email = model.email
@@ -261,7 +243,6 @@ def viewskaprodi(request, id):
 
     contex = {
         'model': model,
-        'response':response,
     }
 
     return render(request, 'kaprodi/viewskaprodi.html', contex)

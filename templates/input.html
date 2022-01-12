@@ -280,7 +280,7 @@
                         </div>
                         <div class="input-box1">
                             <span class="details">Waktu Pelaksanaan</span>
-                            <input type="text" name="waktu_pelaksanaan" placeholder="Waktu Pelaksanaan" required>
+                            <input type="text" name="waktu_pelaksanaan" placeholder="Waktu Pelaksanaan (08:00 - 09:00)" required>
                         </div>
                         <div class="input-box1">
                             <span class="details">Lokasi Pelaksanaan</span>
@@ -291,15 +291,17 @@
 
                         <h1 class="heading">Rencana Anggaran Biaya</h1>
                         <div class="input-box1">
-                            <p class="deskripsi1">Silahkan upload RAB. format file dapat di download <a href="#">Disini</a></p>
+                            {% if model %}
+                            <p class="deskripsi1">Silahkan upload RAB. format file dapat di download <a href="{{model.formRab.url}}">Disini</a></p>
                             <input type="file" name="rab" class="upload-box" accept="application/pdf" required>
+                            {% endif %}
                         </div>
 
                         <!--Bagian File Proposal-->
 
                         <h1 class="heading">File Proposal</h1>
                         <div class="input-box1">
-                            <p class="deskripsi1">Silahkan upload File Proposal. format file dapat di download <a href="#">Disini</a></p>
+                            <p class="deskripsi1">Silahkan upload File Proposal. format file dapat di download <a href="{{model.formFile.url}}">Disini</a></p>
                             <input type="file" name="file_proposal" class="upload-box" accept="application/pdf" required>
                         </div>
                         <div class="button">

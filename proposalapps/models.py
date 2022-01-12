@@ -28,12 +28,12 @@ class ketProposal(models.Model):
     noHP = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     judul = models.CharField(max_length=50)
-    tujuan = models.TextField(max_length=1200)
+    tujuan = models.CharField(max_length=1200)
     tanggal_pelaksanaan = models.DateField(blank=True, null=True)
     waktu_pelaksanaan = models.CharField(max_length=50, default="")
     lokasi_pelaksanaan = models.CharField(max_length=50, default="")
-    rab = models.FileField(blank=True)
-    file_proposal = models.FileField(blank=True)
+    rab = models.FileField(blank=True, upload_to='rab')
+    file_proposal = models.FileField(blank=True, upload_to='proposal')
     keterangan_kaprodi = models.ForeignKey(StatusKaprodi, on_delete=models.CASCADE, related_name='kaprodi_status', default=1)
     keterangan_wd3 = models.ForeignKey(StatusWd3, on_delete=models.CASCADE, related_name='wd3_status', default=1)
 
@@ -41,5 +41,5 @@ class ketProposal(models.Model):
     updated1   = models.TimeField(auto_now=True)
 
 class formatFile(models.Model):
-    formRab = models.FileField(blank=True)
-    formFile = models.FileField(blank=True)
+    formRab = models.FileField(blank=True, upload_to='file_tamplate')
+    formFile = models.FileField(blank=True, upload_to='file_tamplate')
