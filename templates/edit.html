@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+    <section>
+        <!-- ################################################################################################ -->
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                margin-top: 100px;
+                margin-bottom: 20px;
+                max-width: 700px;
+                width: 100%;
+                background-color: #fff;
+                padding: 25px 30px;
+                border-radius: 5px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            .container .title {
+                font-size: 30px;
+                font-weight: 700;
+                position: relative;
+            }
+
+            .container .deskripsi1 {
+                font-weight: 500;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            .content form .Detail-Pengaju {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 20px 0 12px 0;
+            }
+
+            form .Detail-Pengaju .input-box {
+                margin-bottom: 15px;
+                width: calc(100% / 2 - 20px);
+            }
+
+            form .input-box span.details {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .Detail-Pengaju .input-box input {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .Detail-Pengaju .input-box select {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+
+            .Detail-Pengaju .input-box input:focus,
+            .Detail-Pengaju .input-box input:valid {
+                border-color: #929292;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                text-align: left;
+                margin-bottom: 10px;
+            }
+
+            form .Detail-Proposal .input-box1 {
+                margin-bottom: 15px;
+                width: calc(200% / 2 - 20px);
+            }
+
+            form .input-box1 textarea {
+                width: calc(200% / 2 - 20px);
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            form .input-box1 span.details {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .Detail-Proposal .input-box1 input {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                font-size: 16px;
+                border-radius: 5px;
+                padding-left: 15px;
+                border: 1px solid #ccc;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .Detail-Proposal .input-box1 input:focus,
+            .Detail-Proposal .input-box1 input:valid {
+                border-color: #929292;
+            }
+
+            .upload-box {
+                font-size: 16px;
+                background-color: white;
+                width: 100%;
+                align-items: center;
+                padding-top: 10px;
+                padding-bottom: 7px;
+            }
+
+            form .button {
+                height: 45px;
+                margin: 35px 0
+            }
+
+            form .button input {
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
+                border: none;
+                color: #000;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background: linear-gradient(135deg, #cecece, #afafaf);
+            }
+
+            form .button input:hover {
+                /* transform: scale(0.99); */
+                background: linear-gradient(-135deg, #cecece, #afafaf);
+            }
+
+            @media(max-width: 584px) {
+                .container {
+                    max-width: 100%;
+                }
+
+                form .Detail-Pengaju .Detail-Proposal .input-box .input-box1 {
+                    margin-bottom: 15px;
+                    width: 100%;
+                }
+
+                .content form .Detail-Pengaju .Detail-Proposal {
+                    max-height: 500px;
+                    overflow-y: scroll;
+                }
+
+                .Detail-Pengaju .Detail-Proposal::-webkit-scrollbar {
+                    width: 5px;
+                }
+            }
+
+            @media(max-width: 459px) {
+                .container .content {
+                    flex-direction: column;
+                }
+            }
+        </style>
+        <div class="container pengaju">
+            <div class="title">Penginputan Proposal Kegiatan</div>
+            <p class="deskripsi1">Silahkan mengisi bagian-bagian formulir pengajuan proposal sesuai langkah-langkah
+                pengisian untuk dapat diinput.</p>
+            <h1 class="heading">Pengaju Proposal</h1>
+            <div class="content">
+
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <!--Bagian Pihak Pengaju Proposal-->
+                    {% for hidden in data.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+
+                    {% csrf_token %}
+
+                    {% if data.errors %}
+                    <div class="container">
+                        <div class="alert alert-danger alert-dismissible">
+                            {% if errors|length == 1 %}
+                            <span>Silahkan perbaiki data berikut ini !</span>
+                            {% else %}
+                            <span>Silahkan perbaiki data berikut ini !</span>
+                            {% endif %}
+                        </div>
+                        {% for error in data.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                            <i class="icon fa fa-ba"></i>{{ error|capfirst }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="Detail-Pengaju">
+                        {% for field in data.visible_fields %}
+                        <div class="input-box">
+                            <label for="{{ field.id_for_label }}" class="details">{{ field.label }}</label>
+                            <div class="col-sm-12">
+                                {{ field }}
+                                {% if field.help_text %}
+                                <div class="form-text text-white">{{ field.help_text }}</div>
+                                {% endif %}
+                                {% if field.errors %}
+                                {% for error in field.errors %}
+                                <div class="alert alert-warning">{{ error|striptags }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="Detail-Proposal">
+                        <div class="input-box">
+                            <div class="details">
+                                <div class="button">
+                                    <input type="submit" value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- ################################################################################################ -->
+    </section>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+{% endblock %}

@@ -8,12 +8,14 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name="home"),
-    path('input/', pengajuan, name="input"),
+    path('input/<str:id>/', input, name="input"),
     path('panduan/', panduan, name="panduan"),
-    path('hasil_pengaju/', hasil_pengaju, name="hasil_pengaju"),
+    path('edit/<str:judul>/', edit, name="edit"),
+
     path('wakilDekan/', wakilDekan, name="wakilDekan"),
     path('listproposalwd3/', listProposalwd3, name="listproposalwd3"),
     path('viewswd3/<str:id>/', viewswd3, name="viewswd3"),
+
     path('kaprodi/', kaprodi, name="kaprodi"),
     path('viewskaprodi/<str:id>/', viewskaprodi, name="viewskaprodi"),
 

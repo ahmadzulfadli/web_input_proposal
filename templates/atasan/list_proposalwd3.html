@@ -86,20 +86,7 @@
         margin: 20px;
     }
 
-    .list {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        height: 700px;
-        overflow: auto;
-        margin-top: 30px;
-        border: 1px solid #dddddd;
-        margin-left: 35px;
-        margin-right: 30px;
-        border-radius: 10px;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    td {
+    td,th {
         border-bottom: 3px solid #dddddd;
         padding: 10px 20px;
         font-size: 14px;
@@ -173,17 +160,28 @@
             <i class='bx bx-search'></i>
         </div>
 
-        <div class="container list">
-            <table>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Instansi</th>
+                        <th scope="col">Tanggal Publish</th>
+                        <th scope="col">Keterangan</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {% for data in model %}
                     <tr>
-                        <td>{{forloop.counter}}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{data.judul}}</td>
                         <td>{{data.asal_instansi}}</td>
                         <td>{{data.published1}} - {{data.updated1}}</td>
-                        <td><a href="{% url 'viewswd3' data.id %}" class="btn btn-light">Lihat</a></td>
-                        <td><a href="#" class="btn btn-light">Status : {{data.keterangan_wd3}}</a></td>
+                        <td>
+                            <a href="{% url 'viewswd3' data.id %}" class="btn btn-light">Lihat</a>
+                            <a href="#" class="btn btn-light">Status : {{data.keterangan_wd3}}</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

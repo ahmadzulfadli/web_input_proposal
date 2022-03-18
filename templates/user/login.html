@@ -2,7 +2,14 @@
 {% block content %}
 <form action="#" method="POST">
     {% csrf_token %}
+    
     <div class="box">
+        {% for pesan in messages %}
+        <div class="alert alert-success" style="align-items: center; text-align: center; font-size: 16px;">
+            <strong>{{ pesan }}</strong>
+        </div>
+        {% endfor %}
+        
         <div class="login-area">
             <h1 class="title">Login</h1>
             <p class="deskripsi">Silahkan Login Pada Akun Anda Untuk Dapat Mengakses Ke Tahap Selanjutnya</p>
@@ -12,9 +19,9 @@
             </div>
             <input type="submit" value="Login" class="submit">
             <div class="button">
-                <button class="btn"><a href="{% url 'home' %}">Kembali Ke Home</a> </button>
+                <button class="btn"><a href="{% url 'home' %}" style="text-decoration: none;">Kembali Ke Home</a> </button>
             </div>
-        </div>
+        </div>   
     </div>
 </form>
 {% endblock %}

@@ -114,8 +114,8 @@
             <div class="file">
                 <h1 class="heading mt-4 mb-2">Rencana Anggaran Biaya</h1>
                 <div class="row">
-                    <embed type="application/pdf" src="{{response}}" width="auto" height="600"></embed>
-                    <a href="#" class="btn btn-info">Download File</a>
+                    <a href="{{model.rab.url}}" class="btn btn-info" target="_blank">Lihat Rab</a>
+                    <a href="{{model.rab.url}}" class="btn btn-info">Download Rab</a>
                 </div>
             </div>
 
@@ -124,8 +124,8 @@
             <div class="file">
                 <h1 class="heading mt-2 mb-2">File Proposal</h1>
                 <div class="row">
-                    <embed type="application/pdf" src="#" width="auto" height="600"></embed>
-                    <a href="#" class="btn btn-info">Download File</a>
+                    <a href="{{model.file_proposal.url}}" class="btn btn-info" target="_blank">Lihat Proposal</a>
+                    <a href="{{model.file_proposal.url}}" class="btn btn-info">Download Proposal</a>
                 </div>
             </div>
             {% endif %}
@@ -151,7 +151,7 @@
                     <button type="submit" name="system" class="btn btn-success mb-2 mb-4" value="diterima">Terima</button>
                 </form>
                 
-                <a href="{% url 'listproposalwd3' %}" class="btn btn-danger">Kembali Ke Halaman Sebelumnya</a>
+                <a href="{% url 'wakilDekan' %}" class="btn btn-danger">Kembali Ke Halaman Sebelumnya</a>
                 <h4>Tanggapan anda akan dikirim kepada e-mail si pengaju.</h4>
             </div>
 

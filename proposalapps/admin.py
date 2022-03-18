@@ -4,4 +4,6 @@ from . models import *
 admin.site.register([ketProposal])
 admin.site.register([StatusKaprodi,StatusWd3])
 admin.site.register([Instansi])
+admin.site.register([Semester])
+admin.site.register([Jurusan])
 admin.site.register([formatFile])

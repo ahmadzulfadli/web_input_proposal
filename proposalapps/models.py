@@ -19,11 +19,23 @@ class Instansi(models.Model):
     def __str__(self):
         return self.instansi
 
+class Semester(models.Model):
+    semester = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.semester
+
+class Jurusan(models.Model):
+    jurusan = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.jurusan
+
 class ketProposal(models.Model):
     nama = models.CharField(max_length=50)
     nim = models.CharField(max_length=50)
-    jurusan = models.CharField(max_length=20)
-    semester = models.CharField(max_length=50)
+    jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='jurusan_pengaju')
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='semester_pengaju')
     asal_instansi = models.ForeignKey(Instansi, on_delete=models.CASCADE, related_name='instansi_asal')
     noHP = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)

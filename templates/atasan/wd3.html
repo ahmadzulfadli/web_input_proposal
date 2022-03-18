@@ -127,6 +127,12 @@
             <h6 class="heading font-x2">Proposal Masuk</h6>
             <h6 class="heading font-x2">Fakultas Sains Dan Teknologi </br> Universitas Islam Negeri Sultan Syarif Kasim
                 Riau</h6>
+
+            {% for pesan in messages %}
+            <div class="alert alert-success" style="font-size: 20px;">
+                <strong>{{ pesan }}</strong>
+            </div>
+            {% endfor %}
         </div>
         <ul class="list">
             <li class="kotak">

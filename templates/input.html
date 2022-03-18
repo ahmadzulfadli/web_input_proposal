@@ -186,7 +186,104 @@
                 }
             }
         </style>
-        <div class="container">
+        {% if request.POST %}
+        <div class="container hasil_pengaju">
+            {% for pesan in messages %}
+            <div class="alert alert-success">
+                <strong>{{ pesan }}</strong>
+            </div>
+            {% endfor %}
+            <div class="title mb-5" style="text-align: center;">Keterangan Proposal</div>
+            <!--Bagian Pihak Pengaju Proposal-->
+
+            {% if data %}
+
+            <h1 class="heading">Data Pengaju</h1>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Nama</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.nama }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">NIM</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.nim }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Jurusan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.jurusan }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Semester</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.semester }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Asal Organisasi</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.asal_instansi }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">No. Telpon</div>
+                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">: {{ data.noHP }}</div>
+            </div>
+
+            <!--Bagian Pihak Pengaju Proposal-->
+            <h1 class="heading mt-4">Proposal</h1>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Judul</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ data.judul }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Tujuan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ data.tujuan }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Tanggal Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ data.tanggal_pelaksanaan }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Waktu Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ data.waktu_pelaksanaan }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-2 col-md-3">Lokasi Pelaksanaan</div>
+                <div class="col-sm-5 offset-sm-2 col-md-9 offset-md-0">: {{ data.lokasi_pelaksanaan }}</div>
+            </div>
+
+
+            <!--Bagian RAB-->
+            <div class="file">
+                <h1 class="heading mt-4 mb-2">Rencana Anggaran Biaya</h1>
+                <div class="row">
+                    <ul class="my-3 px-5" style="font-weight: bold;">
+                        <li>{{ data.rab }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--Bagian File Proposal-->
+            <div class="file">
+                <h1 class="heading mt-2 mb-2">File Proposal</h1>
+                <div class="row">
+                    <ul class="my-3 px-5" style="font-weight: bold;">
+                        <li>{{ data.file_proposal }}</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="m-5">
+                <form method="POST">
+                    {% csrf_token %}
+                    <a href="{% url 'edit' data.judul %}" class="btn btn-success mb-2 mb-4">edit</a>
+                    <button type="submit" name="system" class="btn btn-info mb-2 mb-4" value="simpan">simpan dan kembali
+                        ke home</button>
+                </form>
+
+            </div>
+            {% endif %}
+        </div>
+
+        {% else %}
+
+        <div class="container pengaju">
             <div class="title">Penginputan Proposal Kegiatan</div>
             <p class="deskripsi1">Silahkan mengisi bagian-bagian formulir pengajuan proposal sesuai langkah-langkah
                 pengisian untuk dapat diinput.</p>
@@ -209,11 +306,11 @@
                             <span class="details">Jurusan</span>
                             <select name="jurusan" id="Jurusan">
                                 <option selected disabled>Pilih Jurusan</option>
-                                <option value="Teknik Elektro">Teknik Elektro</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Teknik Industri">Teknik Industri</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
-                                <option value="Matematika">Matematika</option>
+                                <option value="1">Teknik Elektro</option>
+                                <option value="2">Teknik Informatika</option>
+                                <option value="3">Teknik Industri</option>
+                                <option value="4">Sistem Informasi</option>
+                                <option value="5">Matematika</option>
                             </select>
                         </div>
                         <div class="input-box">
@@ -221,33 +318,33 @@
                             <select name="semester">
                                 <option selected disabled>Pilih Semester</option>
                                 <optgroup label="Ganjil">
-                                    <option value="Semester 1">Semester 1</option>
-                                    <option value="Semester 3">Semester 3</option>
-                                    <option value="Semester 5">Semester 5</option>
-                                    <option value="Semester 7">Semester 7</option>
-                                    <option value="Semester 9">Semester 9</option>
-                                    <option value="Semester 11">Semester 11</option>
-                                    <option value="Semester 13">Semester 13</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="9">Semester 9</option>
+                                    <option value="11">Semester 11</option>
+                                    <option value="13">Semester 13</option>
                                 <optgroup label="Genap">
-                                    <option value="Semester 2">Semester 2</option>
-                                    <option value="Semester 4">Semester 4</option>
-                                    <option value="Semester 6">Semester 6</option>
-                                    <option value="Semester 8">Semester 8</option>
-                                    <option value="Semester 10">Semester 10</option>
-                                    <option value="Semester 12">Semester 12</option>
-                                    <option value="Semester 14">Semester 14</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="8">Semester 8</option>
+                                    <option value="10">Semester 10</option>
+                                    <option value="12">Semester 12</option>
+                                    <option value="14">Semester 14</option>
                             </select>
                         </div>
                         <div class="input-box">
                             <span class="details">Asal Instansi</span>
                             <select name="asal_instansi" id="Instansi">
                                 <option selected disabled>Pilih Asal Instansi</option>
-                                <option value=1>Teknik Elektro</option>
-                                <option value=2>Teknik Informatika</option>
-                                <option value=3>Teknik Industri</option>
-                                <option value=4>Sistem Informasi</option>
-                                <option value=5>Matematika</option>
-                                <option value=7 >DEMA</option>
+                                <option value=1>HIMATE</option>
+                                <option value=2>HIMATIF</option>
+                                <option value=3>HIMATIN</option>
+                                <option value=4>HIMASIF</option>
+                                <option value=5>HIMATEM</option>
+                                <option value=7>DEMA</option>
                                 <option value=6>SEMA</option>
                                 <option value=8>UKM-UKK</option>
                             </select>
@@ -280,7 +377,8 @@
                         </div>
                         <div class="input-box1">
                             <span class="details">Waktu Pelaksanaan</span>
-                            <input type="text" name="waktu_pelaksanaan" placeholder="Waktu Pelaksanaan (08:00 - 09:00)" required>
+                            <input type="text" name="waktu_pelaksanaan" placeholder="Waktu Pelaksanaan (08:00 - 09:00)"
+                                required>
                         </div>
                         <div class="input-box1">
                             <span class="details">Lokasi Pelaksanaan</span>
@@ -292,7 +390,8 @@
                         <h1 class="heading">Rencana Anggaran Biaya</h1>
                         <div class="input-box1">
                             {% if model %}
-                            <p class="deskripsi1">Silahkan upload RAB. format file dapat di download <a href="{{model.formRab.url}}">Disini</a></p>
+                            <p class="deskripsi1">Silahkan upload RAB. format file dapat di download <a
+                                    href="{{model.formRab.url}}">Disini</a></p>
                             <input type="file" name="rab" class="upload-box" accept="application/pdf" required>
                             {% endif %}
                         </div>
@@ -301,35 +400,21 @@
 
                         <h1 class="heading">File Proposal</h1>
                         <div class="input-box1">
-                            <p class="deskripsi1">Silahkan upload File Proposal. format file dapat di download <a href="{{model.formFile.url}}">Disini</a></p>
-                            <input type="file" name="file_proposal" class="upload-box" accept="application/pdf" required>
+                            <p class="deskripsi1">Silahkan upload File Proposal. format file dapat di download <a
+                                    href="{{model.formFile.url}}">Disini</a></p>
+                            <input type="file" name="file_proposal" class="upload-box" accept="application/pdf"
+                                required>
                         </div>
                         <div class="button">
                             <input type="submit" value="Submit">
                         </div>
                     </div>
-
-                    <!--Script untuk textarea pada bagian Inti Proposal Tujuan-->
-
-                    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
-
-                    <script>
-                        ClassicEditor
-                            .create(document.querySelector('#editor'))
-                            .catch(error => {
-                                console.error(error);
-                            });
-                    </script>
-
                 </form>
-                {% for pesan in messages %}
-                <script>
-                    alert("{{pesan}}");
-                </script>
-                {% endfor %}
+
             </div>
-        </div>
-        <!-- ################################################################################################ -->
+
+            {% endif %}
+            <!-- ################################################################################################ -->
     </section>
 </div>
 <!-- ################################################################################################ -->
